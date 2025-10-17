@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 import textwrap
 
 output_path = os.path.join('src', 'MegaUltraverse.lua')
@@ -10,7 +10,7 @@ lines = []
 lines.extend([
     "--[[",
     "Mega Ultraverse Mode Script",
-    f"Generated on {datetime.utcnow().isoformat()}",
+    f"Generated on {datetime.now(timezone.utc).isoformat()}",
     "This script powers an experimental AAA-scale Roblox experience with layered mechanics.",
     "Each system is designed to interlock, supporting dynamic storytelling, combat, and progression.",
     "]]",
