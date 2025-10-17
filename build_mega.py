@@ -2,8 +2,15 @@ import os
 from datetime import datetime, timezone
 import textwrap
 
+
+def log_step(message: str) -> None:
+    """Emit a structured progress message for terminal users."""
+    print(f"[MegaBuilder] {message}")
+
 output_path = os.path.join('src', 'MegaUltraverse.lua')
 os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
+log_step('Listing MegaUltraverse content blocks...')
 
 lines = []
 
@@ -2215,6 +2222,12 @@ if not content.endswith('\n'):
     content = content + '\n'
 content = content + 'return MegaUltraverse\n'
 
+line_count = content.count('\n')
+
 with open(output_path, 'w', encoding='utf-8') as lua_file:
     lua_file.write(content)
+
+log_step(
+    f"Compiling MegaUltraverse.lua -> wrote {line_count} lines to {os.path.abspath(output_path)}"
+)
 

@@ -1,6 +1,6 @@
 --[[
 Mega Ultraverse Mode Script
-Generated on 2025-10-17T23:27:36.348252+00:00
+Generated on 2025-10-17T23:33:25.024826+00:00
 This script powers an experimental AAA-scale Roblox experience with layered mechanics.
 Each system is designed to interlock, supporting dynamic storytelling, combat, and progression.
 ]]
@@ -2764,49 +2764,49 @@ MegaUltraverse.AIBehaviors["behavior_profile_60"] = { Aggression = 1.10, Strateg
 -- Procedural soundtrack playlists for different realms
 MegaUltraverse.Soundtrack = MegaUltraverse.Soundtrack or {}
 MegaUltraverse.Soundtrack["Aurora Citadel"] = {}
-table.insert(MegaUltraverse.Soundtrack["Aurora Citadel"], "rbxassetid://20045366801")
-table.insert(MegaUltraverse.Soundtrack["Aurora Citadel"], "rbxassetid://53640158202")
-table.insert(MegaUltraverse.Soundtrack["Aurora Citadel"], "rbxassetid://7115160903")
-table.insert(MegaUltraverse.Soundtrack["Aurora Citadel"], "rbxassetid://68133551304")
-table.insert(MegaUltraverse.Soundtrack["Aurora Citadel"], "rbxassetid://92621767805")
-table.insert(MegaUltraverse.Soundtrack["Aurora Citadel"], "rbxassetid://82421925306")
-table.insert(MegaUltraverse.Soundtrack["Aurora Citadel"], "rbxassetid://79691561907")
-table.insert(MegaUltraverse.Soundtrack["Aurora Citadel"], "rbxassetid://67928532208")
-table.insert(MegaUltraverse.Soundtrack["Aurora Citadel"], "rbxassetid://65198168809")
-table.insert(MegaUltraverse.Soundtrack["Aurora Citadel"], "rbxassetid://54998326310")
+table.insert(MegaUltraverse.Soundtrack["Aurora Citadel"], "rbxassetid://59526969201")
+table.insert(MegaUltraverse.Soundtrack["Aurora Citadel"], "rbxassetid://14158555802")
+table.insert(MegaUltraverse.Soundtrack["Aurora Citadel"], "rbxassetid://46596763303")
+table.insert(MegaUltraverse.Soundtrack["Aurora Citadel"], "rbxassetid://43866399904")
+table.insert(MegaUltraverse.Soundtrack["Aurora Citadel"], "rbxassetid://32103370205")
+table.insert(MegaUltraverse.Soundtrack["Aurora Citadel"], "rbxassetid://21903527706")
+table.insert(MegaUltraverse.Soundtrack["Aurora Citadel"], "rbxassetid://19173164307")
+table.insert(MegaUltraverse.Soundtrack["Aurora Citadel"], "rbxassetid://91026678208")
+table.insert(MegaUltraverse.Soundtrack["Aurora Citadel"], "rbxassetid://4679771209")
+table.insert(MegaUltraverse.Soundtrack["Aurora Citadel"], "rbxassetid://94479928710")
 MegaUltraverse.Soundtrack["Verdant Paradox"] = {}
-table.insert(MegaUltraverse.Soundtrack["Verdant Paradox"], "rbxassetid://27240857801")
-table.insert(MegaUltraverse.Soundtrack["Verdant Paradox"], "rbxassetid://33514461302")
-table.insert(MegaUltraverse.Soundtrack["Verdant Paradox"], "rbxassetid://30784097903")
-table.insert(MegaUltraverse.Soundtrack["Verdant Paradox"], "rbxassetid://19021068204")
-table.insert(MegaUltraverse.Soundtrack["Verdant Paradox"], "rbxassetid://54664456805")
-table.insert(MegaUltraverse.Soundtrack["Verdant Paradox"], "rbxassetid://6090862306")
-table.insert(MegaUltraverse.Soundtrack["Verdant Paradox"], "rbxassetid://4108980207")
-table.insert(MegaUltraverse.Soundtrack["Verdant Paradox"], "rbxassetid://93160656408")
-table.insert(MegaUltraverse.Soundtrack["Verdant Paradox"], "rbxassetid://81397626709")
-table.insert(MegaUltraverse.Soundtrack["Verdant Paradox"], "rbxassetid://78667263310")
+table.insert(MegaUltraverse.Soundtrack["Verdant Paradox"], "rbxassetid://14686564401")
+table.insert(MegaUltraverse.Soundtrack["Verdant Paradox"], "rbxassetid://82583072202")
+table.insert(MegaUltraverse.Soundtrack["Verdant Paradox"], "rbxassetid://70820042503")
+table.insert(MegaUltraverse.Soundtrack["Verdant Paradox"], "rbxassetid://39379800004")
+table.insert(MegaUltraverse.Soundtrack["Verdant Paradox"], "rbxassetid://57889836605")
+table.insert(MegaUltraverse.Soundtrack["Verdant Paradox"], "rbxassetid://52310005906")
+table.insert(MegaUltraverse.Soundtrack["Verdant Paradox"], "rbxassetid://43396443507")
+table.insert(MegaUltraverse.Soundtrack["Verdant Paradox"], "rbxassetid://66803399008")
+table.insert(MegaUltraverse.Soundtrack["Verdant Paradox"], "rbxassetid://30466237609")
+table.insert(MegaUltraverse.Soundtrack["Verdant Paradox"], "rbxassetid://79733604910")
 MegaUltraverse.Soundtrack["Fractured Steppe"] = {}
-table.insert(MegaUltraverse.Soundtrack["Fractured Steppe"], "rbxassetid://15875819101")
-table.insert(MegaUltraverse.Soundtrack["Fractured Steppe"], "rbxassetid://4112789402")
-table.insert(MegaUltraverse.Soundtrack["Fractured Steppe"], "rbxassetid://1382426003")
-table.insert(MegaUltraverse.Soundtrack["Fractured Steppe"], "rbxassetid://91182583504")
-table.insert(MegaUltraverse.Soundtrack["Fractured Steppe"], "rbxassetid://88452220105")
-table.insert(MegaUltraverse.Soundtrack["Fractured Steppe"], "rbxassetid://76689190406")
-table.insert(MegaUltraverse.Soundtrack["Fractured Steppe"], "rbxassetid://33510652107")
-table.insert(MegaUltraverse.Soundtrack["Fractured Steppe"], "rbxassetid://63758984508")
-table.insert(MegaUltraverse.Soundtrack["Fractured Steppe"], "rbxassetid://46440858009")
-table.insert(MegaUltraverse.Soundtrack["Fractured Steppe"], "rbxassetid://49265591410")
+table.insert(MegaUltraverse.Soundtrack["Fractured Steppe"], "rbxassetid://24020237901")
+table.insert(MegaUltraverse.Soundtrack["Fractured Steppe"], "rbxassetid://49665287102")
+table.insert(MegaUltraverse.Soundtrack["Fractured Steppe"], "rbxassetid://11090032003")
+table.insert(MegaUltraverse.Soundtrack["Fractured Steppe"], "rbxassetid://64158680204")
+table.insert(MegaUltraverse.Soundtrack["Fractured Steppe"], "rbxassetid://96596638905")
+table.insert(MegaUltraverse.Soundtrack["Fractured Steppe"], "rbxassetid://77088886106")
+table.insert(MegaUltraverse.Soundtrack["Fractured Steppe"], "rbxassetid://83666433007")
+table.insert(MegaUltraverse.Soundtrack["Fractured Steppe"], "rbxassetid://71903403308")
+table.insert(MegaUltraverse.Soundtrack["Fractured Steppe"], "rbxassetid://69173039909")
+table.insert(MegaUltraverse.Soundtrack["Fractured Steppe"], "rbxassetid://58973197410")
 MegaUltraverse.Soundtrack["Harmonic Abyss"] = {}
-table.insert(MegaUltraverse.Soundtrack["Harmonic Abyss"], "rbxassetid://27858077301")
-table.insert(MegaUltraverse.Soundtrack["Harmonic Abyss"], "rbxassetid://39621107002")
-table.insert(MegaUltraverse.Soundtrack["Harmonic Abyss"], "rbxassetid://42351470403")
-table.insert(MegaUltraverse.Soundtrack["Harmonic Abyss"], "rbxassetid://52551312904")
-table.insert(MegaUltraverse.Soundtrack["Harmonic Abyss"], "rbxassetid://55281676305")
-table.insert(MegaUltraverse.Soundtrack["Harmonic Abyss"], "rbxassetid://67044706006")
-table.insert(MegaUltraverse.Soundtrack["Harmonic Abyss"], "rbxassetid://93710613107")
-table.insert(MegaUltraverse.Soundtrack["Harmonic Abyss"], "rbxassetid://79974911908")
-table.insert(MegaUltraverse.Soundtrack["Harmonic Abyss"], "rbxassetid://80780407209")
-table.insert(MegaUltraverse.Soundtrack["Harmonic Abyss"], "rbxassetid://92905117810")
+table.insert(MegaUltraverse.Soundtrack["Harmonic Abyss"], "rbxassetid://82749116301")
+table.insert(MegaUltraverse.Soundtrack["Harmonic Abyss"], "rbxassetid://14520520302")
+table.insert(MegaUltraverse.Soundtrack["Harmonic Abyss"], "rbxassetid://95679322203")
+table.insert(MegaUltraverse.Soundtrack["Harmonic Abyss"], "rbxassetid://1590314404")
+table.insert(MegaUltraverse.Soundtrack["Harmonic Abyss"], "rbxassetid://10172715305")
+table.insert(MegaUltraverse.Soundtrack["Harmonic Abyss"], "rbxassetid://87096921306")
+table.insert(MegaUltraverse.Soundtrack["Harmonic Abyss"], "rbxassetid://23102921207")
+table.insert(MegaUltraverse.Soundtrack["Harmonic Abyss"], "rbxassetid://33302763708")
+table.insert(MegaUltraverse.Soundtrack["Harmonic Abyss"], "rbxassetid://62403685709")
+table.insert(MegaUltraverse.Soundtrack["Harmonic Abyss"], "rbxassetid://47796156810")
 
 -- Seasonal objectives to rotate gameplay variety
 MegaUltraverse.SeasonalObjectives = MegaUltraverse.SeasonalObjectives or {}
@@ -2912,12 +2912,12 @@ MegaUltraverse.HyperChallenges[50] = { Name = "Hyper Challenge 50", Requirement 
 
 -- Immersive emotes for social spaces
 MegaUltraverse.Emotes = MegaUltraverse.Emotes or {}
-MegaUltraverse.Emotes["HarmonicWave"] = { Animation = "rbxassetid://864572956", Duration = 4 }
-MegaUltraverse.Emotes["ChronoStep"] = { Animation = "rbxassetid://851613337", Duration = 4 }
-MegaUltraverse.Emotes["NebulaSpin"] = { Animation = "rbxassetid://285614776", Duration = 4 }
-MegaUltraverse.Emotes["EchoPulse"] = { Animation = "rbxassetid://267578577", Duration = 4 }
-MegaUltraverse.Emotes["AuroraDance"] = { Animation = "rbxassetid://185205541", Duration = 4 }
-MegaUltraverse.Emotes["GravityFlip"] = { Animation = "rbxassetid://134038044", Duration = 4 }
+MegaUltraverse.Emotes["HarmonicWave"] = { Animation = "rbxassetid://93411494", Duration = 4 }
+MegaUltraverse.Emotes["ChronoStep"] = { Animation = "rbxassetid://178138997", Duration = 4 }
+MegaUltraverse.Emotes["NebulaSpin"] = { Animation = "rbxassetid://184916116", Duration = 4 }
+MegaUltraverse.Emotes["EchoPulse"] = { Animation = "rbxassetid://214184487", Duration = 4 }
+MegaUltraverse.Emotes["AuroraDance"] = { Animation = "rbxassetid://198215813", Duration = 4 }
+MegaUltraverse.Emotes["GravityFlip"] = { Animation = "rbxassetid://386903386", Duration = 4 }
 
 -- Expedition templates for large-scale cooperative adventures
 MegaUltraverse.Expeditions = MegaUltraverse.Expeditions or {}

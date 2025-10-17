@@ -58,12 +58,12 @@
    python build_mega.py
    ```
    Если система сообщает `python` не найден, попробуйте `py` (Windows) или `python3` (macOS/Linux).
-2. Скрипт автоматически перезапишет файл `src/MegaUltraverse.lua`, создавая актуальную версию ModuleScript. В конце выполнения вы увидите сообщение `MegaUltraverse.lua updated`.
+2. Скрипт автоматически перезапишет файл `src/MegaUltraverse.lua`, создавая актуальную версию ModuleScript. В консоли появятся строки вида `[MegaBuilder] Listing MegaUltraverse content blocks...` и `[MegaBuilder] Compiling MegaUltraverse.lua -> wrote XXXX lines to ...` — они подтверждают успешную генерацию.
 3. Чтобы убедиться, что генератор не содержит синтаксических ошибок, можно дополнительно выполнить:
    ```bash
    python -m compileall build_mega.py
    ```
-   Если ошибок нет, вы увидите строку `Listing ...` и `Compiling ...` без сообщений об исключениях.
+   Если ошибок нет, появится строка вроде `Compiling 'build_mega.py'...` без предупреждений и исключений.
 
 ## 5. Импорт в Roblox Studio
 1. Запустите Roblox Studio и откройте нужное место (Place).
