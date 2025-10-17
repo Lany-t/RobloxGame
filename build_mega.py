@@ -1,11 +1,51 @@
+import hashlib
 import os
 from datetime import datetime, timezone
 import textwrap
+from typing import Any, Iterable
 
 
 def log_step(message: str) -> None:
     """Emit a structured progress message for terminal users."""
     print(f"[MegaBuilder] {message}")
+
+
+def _escape_lua_string(value: str) -> str:
+    """Escape characters that are special in Lua string literals."""
+    return value.replace("\\", "\\\\").replace('"', '\\"')
+
+
+def lua_literal(value: Any) -> str:
+    """Convert a Python value into a Lua literal string."""
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    if isinstance(value, (int, float)):
+        return str(value)
+    if isinstance(value, str):
+        return f'"{_escape_lua_string(value)}"'
+    if value is None:
+        return "nil"
+    if isinstance(value, (list, tuple)):
+        return lua_array(value)
+    if isinstance(value, dict):
+        items = []
+        for key, item_value in value.items():
+            items.append(f"[{lua_literal(key)}] = {lua_literal(item_value)}")
+        inner = ', '.join(items)
+        return f"{{ {inner} }}" if items else "{}"
+    raise TypeError(f"Unsupported value type for Lua serialization: {type(value)!r}")
+
+
+def lua_array(items: Iterable[Any]) -> str:
+    values = [lua_literal(item) for item in items]
+    return f"{{ {', '.join(values)} }}" if values else "{}"
+
+
+def deterministic_numeric_id(*parts: Any, modulo: int = 10**9) -> int:
+    """Generate a stable numeric identifier from the provided parts."""
+    payload = "::".join(str(part) for part in parts)
+    digest = hashlib.sha256(payload.encode('utf-8')).hexdigest()
+    return int(digest[:12], 16) % modulo
 
 output_path = os.path.join('src', 'MegaUltraverse.lua')
 os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -297,12 +337,14 @@ lines.append('-- Faction registry with diplomacy layers and AI behavior archetyp
 lines.append('do')
 lines.append('    local factionRegistry = MegaUltraverse.Registries.Factions')
 for name, description, signature, roles, title in factions:
+    signature_literal = lua_array(signature)
+    roles_literal = lua_array(roles)
     block = textwrap.dedent(f"""
     factionRegistry["{name}"] = {{
         Name = "{name}",
         Description = "{description}",
-        SignatureAbilities = {signature},
-        NPCArchetypes = {roles},
+        SignatureAbilities = {signature_literal},
+        NPCArchetypes = {roles_literal},
         PrestigeTitle = "{title}",
         DiplomacyMatrix = {{
             ["Eclipse Vanguard"] = {{ Standing = 85, Trade = true, Rivalry = false }},
@@ -331,12 +373,14 @@ lines.append('-- Biome registry describing traversal and environmental puzzles')
 lines.append('do')
 lines.append('    local biomeRegistry = MegaUltraverse.Registries.Biomes')
 for name, description, favored, signature in biomes:
+    favored_literal = lua_array(favored)
+    signature_literal = lua_array(signature)
     block = textwrap.dedent(f"""
     biomeRegistry["{name}"] = {{
         Name = "{name}",
         Description = "{description}",
-        FavoredFactions = {favored},
-        SignatureAbilities = {signature},
+        FavoredFactions = {favored_literal},
+        SignatureAbilities = {signature_literal},
         EnvironmentalPuzzles = {{
             {{ Name = "Phase Shift Relays", Complexity = 4 }},
             {{ Name = "Echo Lattice", Complexity = 5 }},
@@ -1770,8 +1814,9 @@ lines.append('MegaUltraverse.Soundtrack = MegaUltraverse.Soundtrack or {}')
 for realm in ['Aurora Citadel', 'Verdant Paradox', 'Fractured Steppe', 'Harmonic Abyss']:
     lines.append(f'MegaUltraverse.Soundtrack["{realm}"] = {{}}')
     for i in range(1, 11):
-        asset_id = abs(hash((realm, i))) % 10**9
-        lines.append(f'table.insert(MegaUltraverse.Soundtrack["{realm}"], "rbxassetid://{asset_id}{i:02d}")')
+        asset_id = deterministic_numeric_id(realm, i) or 1
+        asset_text = f"{asset_id}{i:02d}"
+        lines.append(f'table.insert(MegaUltraverse.Soundtrack["{realm}"], "rbxassetid://{asset_text}")')
 lines.append('')
 
 lines.append('-- Seasonal objectives to rotate gameplay variety')
@@ -1795,7 +1840,7 @@ lines.append('')
 lines.append('-- Immersive emotes for social spaces')
 lines.append('MegaUltraverse.Emotes = MegaUltraverse.Emotes or {}')
 for emote in ['HarmonicWave', 'ChronoStep', 'NebulaSpin', 'EchoPulse', 'AuroraDance', 'GravityFlip']:
-    asset = abs(hash(emote)) % 10**9
+    asset = deterministic_numeric_id(emote) or 1
     lines.append(f'MegaUltraverse.Emotes["{emote}"] = {{ Animation = "rbxassetid://{asset}", Duration = 4 }}')
 lines.append('')
 
