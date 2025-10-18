@@ -62,7 +62,16 @@ lines.extend([
     "Each system is designed to interlock, supporting dynamic storytelling, combat, and progression.",
     "]]",
     "",
-    "local MegaUltraverse = {}",
+    "local MegaUltraverse = {",
+    "    SharedRandom = nil,",
+    "    State = nil,",
+    "    Systems = nil,",
+    "    Registries = nil,",
+    "    LiveEvents = nil,",
+    "    PlayerProfiles = nil,",
+    "    Timers = nil,",
+    "    Config = nil,",
+    "}",
     "",
 ])
 
@@ -634,7 +643,15 @@ MegaUltraverse.Systems.CinematicDirector = {
 }
 
 function MegaUltraverse.Systems.CinematicDirector:QueueSequence(sequenceName, binding)
-    local sequence = MegaUltraverse.Config.CinematicMoments[sequenceName]
+    local config = MegaUltraverse.Config
+    if not config then
+        return
+    end
+    local cinematicMoments = config.CinematicMoments
+    if not cinematicMoments then
+        return
+    end
+    local sequence = cinematicMoments[sequenceName]
     if not sequence then
         return
     end

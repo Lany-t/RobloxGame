@@ -1,11 +1,20 @@
 --[[
 Mega Ultraverse Mode Script
-Generated on 2025-10-18T09:32:37.246652+00:00
+Generated on 2025-10-18T09:40:02.427922+00:00
 This script powers an experimental AAA-scale Roblox experience with layered mechanics.
 Each system is designed to interlock, supporting dynamic storytelling, combat, and progression.
 ]]
 
-local MegaUltraverse = {}
+local MegaUltraverse = {
+    SharedRandom = nil,
+    State = nil,
+    Systems = nil,
+    Registries = nil,
+    LiveEvents = nil,
+    PlayerProfiles = nil,
+    Timers = nil,
+    Config = nil,
+}
 
 -- Services and core dependencies
 local CollectionService = game:GetService("CollectionService")
@@ -607,7 +616,15 @@ MegaUltraverse.Systems.CinematicDirector = {
 }
 
 function MegaUltraverse.Systems.CinematicDirector:QueueSequence(sequenceName, binding)
-    local sequence = MegaUltraverse.Config.CinematicMoments[sequenceName]
+    local config = MegaUltraverse.Config
+    if not config then
+        return
+    end
+    local cinematicMoments = config.CinematicMoments
+    if not cinematicMoments then
+        return
+    end
+    local sequence = cinematicMoments[sequenceName]
     if not sequence then
         return
     end
