@@ -1,6 +1,6 @@
 --[[
 Mega Ultraverse Mode Script
-Generated on 2025-10-17T23:51:31.845291+00:00
+Generated on 2025-10-18T00:06:58.410164+00:00
 This script powers an experimental AAA-scale Roblox experience with layered mechanics.
 Each system is designed to interlock, supporting dynamic storytelling, combat, and progression.
 ]]
@@ -1401,6 +1401,45 @@ end
 function MegaUltraverse:Initialize()
     MegaUltraverse.Systems.FactionDirector:Initialize()
     MegaUltraverse.Systems.Economy:Initialize()
+end
+
+function MegaUltraverse:Boot()
+    if self._booted then
+        warn("[MegaUltraverse] Boot() called more than once; ignoring.")
+        return self
+    end
+
+    self._booted = true
+    self.State = self.State or {}
+    self.State.BootedAt = os.clock()
+    self.State.LastTick = os.clock()
+
+    self:Initialize()
+
+    if self._heartbeatConnection then
+        self._heartbeatConnection:Disconnect()
+        self._heartbeatConnection = nil
+    end
+
+    self._heartbeatConnection = RunService.Heartbeat:Connect(function(deltaTime)
+        self.State.LastTick = os.clock()
+        self:Tick(deltaTime)
+    end)
+
+    print("[MegaUltraverse] Systems booted and heartbeat attached.")
+    return self
+end
+
+function MegaUltraverse:Shutdown()
+    if self._heartbeatConnection then
+        self._heartbeatConnection:Disconnect()
+        self._heartbeatConnection = nil
+    end
+
+    self._booted = false
+    if self.State then
+        self.State.LastTick = nil
+    end
 end
 
 -- Questline registration with expansive narrative arcs
@@ -3342,21 +3381,21 @@ MegaUltraverse.WeeklyChallenges[20] = { Name = "Weekly Challenge 20", Goal = 400
 
 -- Seasonal vendors with rotating inventories
 MegaUltraverse.SeasonalVendors = MegaUltraverse.SeasonalVendors or {}
-MegaUltraverse.SeasonalVendors[1] = { Name = "Vendor 1", Inventory = { "Relic of Infinite Strata 1" = 1 }, RefreshInterval = 7200 }
-MegaUltraverse.SeasonalVendors[2] = { Name = "Vendor 2", Inventory = { "Relic of Infinite Strata 2" = 1 }, RefreshInterval = 10800 }
-MegaUltraverse.SeasonalVendors[3] = { Name = "Vendor 3", Inventory = { "Relic of Infinite Strata 3" = 1 }, RefreshInterval = 14400 }
-MegaUltraverse.SeasonalVendors[4] = { Name = "Vendor 4", Inventory = { "Relic of Infinite Strata 4" = 1 }, RefreshInterval = 18000 }
-MegaUltraverse.SeasonalVendors[5] = { Name = "Vendor 5", Inventory = { "Relic of Infinite Strata 5" = 1 }, RefreshInterval = 21600 }
-MegaUltraverse.SeasonalVendors[6] = { Name = "Vendor 6", Inventory = { "Relic of Infinite Strata 6" = 1 }, RefreshInterval = 3600 }
-MegaUltraverse.SeasonalVendors[7] = { Name = "Vendor 7", Inventory = { "Relic of Infinite Strata 7" = 1 }, RefreshInterval = 7200 }
-MegaUltraverse.SeasonalVendors[8] = { Name = "Vendor 8", Inventory = { "Relic of Infinite Strata 8" = 1 }, RefreshInterval = 10800 }
-MegaUltraverse.SeasonalVendors[9] = { Name = "Vendor 9", Inventory = { "Relic of Infinite Strata 9" = 1 }, RefreshInterval = 14400 }
-MegaUltraverse.SeasonalVendors[10] = { Name = "Vendor 10", Inventory = { "Relic of Infinite Strata 10" = 1 }, RefreshInterval = 18000 }
-MegaUltraverse.SeasonalVendors[11] = { Name = "Vendor 11", Inventory = { "Relic of Infinite Strata 11" = 1 }, RefreshInterval = 21600 }
-MegaUltraverse.SeasonalVendors[12] = { Name = "Vendor 12", Inventory = { "Relic of Infinite Strata 12" = 1 }, RefreshInterval = 3600 }
-MegaUltraverse.SeasonalVendors[13] = { Name = "Vendor 13", Inventory = { "Relic of Infinite Strata 13" = 1 }, RefreshInterval = 7200 }
-MegaUltraverse.SeasonalVendors[14] = { Name = "Vendor 14", Inventory = { "Relic of Infinite Strata 14" = 1 }, RefreshInterval = 10800 }
-MegaUltraverse.SeasonalVendors[15] = { Name = "Vendor 15", Inventory = { "Relic of Infinite Strata 15" = 1 }, RefreshInterval = 14400 }
+MegaUltraverse.SeasonalVendors[1] = { Name = "Vendor 1", Inventory = { ["Relic of Infinite Strata 1"] = 1 }, RefreshInterval = 7200 }
+MegaUltraverse.SeasonalVendors[2] = { Name = "Vendor 2", Inventory = { ["Relic of Infinite Strata 2"] = 1 }, RefreshInterval = 10800 }
+MegaUltraverse.SeasonalVendors[3] = { Name = "Vendor 3", Inventory = { ["Relic of Infinite Strata 3"] = 1 }, RefreshInterval = 14400 }
+MegaUltraverse.SeasonalVendors[4] = { Name = "Vendor 4", Inventory = { ["Relic of Infinite Strata 4"] = 1 }, RefreshInterval = 18000 }
+MegaUltraverse.SeasonalVendors[5] = { Name = "Vendor 5", Inventory = { ["Relic of Infinite Strata 5"] = 1 }, RefreshInterval = 21600 }
+MegaUltraverse.SeasonalVendors[6] = { Name = "Vendor 6", Inventory = { ["Relic of Infinite Strata 6"] = 1 }, RefreshInterval = 3600 }
+MegaUltraverse.SeasonalVendors[7] = { Name = "Vendor 7", Inventory = { ["Relic of Infinite Strata 7"] = 1 }, RefreshInterval = 7200 }
+MegaUltraverse.SeasonalVendors[8] = { Name = "Vendor 8", Inventory = { ["Relic of Infinite Strata 8"] = 1 }, RefreshInterval = 10800 }
+MegaUltraverse.SeasonalVendors[9] = { Name = "Vendor 9", Inventory = { ["Relic of Infinite Strata 9"] = 1 }, RefreshInterval = 14400 }
+MegaUltraverse.SeasonalVendors[10] = { Name = "Vendor 10", Inventory = { ["Relic of Infinite Strata 10"] = 1 }, RefreshInterval = 18000 }
+MegaUltraverse.SeasonalVendors[11] = { Name = "Vendor 11", Inventory = { ["Relic of Infinite Strata 11"] = 1 }, RefreshInterval = 21600 }
+MegaUltraverse.SeasonalVendors[12] = { Name = "Vendor 12", Inventory = { ["Relic of Infinite Strata 12"] = 1 }, RefreshInterval = 3600 }
+MegaUltraverse.SeasonalVendors[13] = { Name = "Vendor 13", Inventory = { ["Relic of Infinite Strata 13"] = 1 }, RefreshInterval = 7200 }
+MegaUltraverse.SeasonalVendors[14] = { Name = "Vendor 14", Inventory = { ["Relic of Infinite Strata 14"] = 1 }, RefreshInterval = 10800 }
+MegaUltraverse.SeasonalVendors[15] = { Name = "Vendor 15", Inventory = { ["Relic of Infinite Strata 15"] = 1 }, RefreshInterval = 14400 }
 
 -- Customizable player sanctums
 MegaUltraverse.Sanctums = MegaUltraverse.Sanctums or {}

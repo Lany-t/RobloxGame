@@ -1491,6 +1491,45 @@ function MegaUltraverse:Initialize()
     MegaUltraverse.Systems.FactionDirector:Initialize()
     MegaUltraverse.Systems.Economy:Initialize()
 end
+
+function MegaUltraverse:Boot()
+    if self._booted then
+        warn("[MegaUltraverse] Boot() called more than once; ignoring.")
+        return self
+    end
+
+    self._booted = true
+    self.State = self.State or {}
+    self.State.BootedAt = os.clock()
+    self.State.LastTick = os.clock()
+
+    self:Initialize()
+
+    if self._heartbeatConnection then
+        self._heartbeatConnection:Disconnect()
+        self._heartbeatConnection = nil
+    end
+
+    self._heartbeatConnection = RunService.Heartbeat:Connect(function(deltaTime)
+        self.State.LastTick = os.clock()
+        self:Tick(deltaTime)
+    end)
+
+    print("[MegaUltraverse] Systems booted and heartbeat attached.")
+    return self
+end
+
+function MegaUltraverse:Shutdown()
+    if self._heartbeatConnection then
+        self._heartbeatConnection:Disconnect()
+        self._heartbeatConnection = nil
+    end
+
+    self._booted = false
+    if self.State then
+        self.State.LastTick = nil
+    end
+end
 """
 add_block(mega_methods)
 
@@ -1920,7 +1959,11 @@ lines.append('')
 lines.append('-- Seasonal vendors with rotating inventories')
 lines.append('MegaUltraverse.SeasonalVendors = MegaUltraverse.SeasonalVendors or {}')
 for i in range(1, 16):
-    lines.append(f'MegaUltraverse.SeasonalVendors[{i}] = {{ Name = "Vendor {i}", Inventory = {{ "Relic of Infinite Strata {i}" = 1 }}, RefreshInterval = {3600 * (i % 6 + 1)} }}')
+    inventory_literal = lua_literal({f"Relic of Infinite Strata {i}": 1})
+    refresh_interval = 3600 * (i % 6 + 1)
+    lines.append(
+        f'MegaUltraverse.SeasonalVendors[{i}] = {{ Name = "Vendor {i}", Inventory = {inventory_literal}, RefreshInterval = {refresh_interval} }}'
+    )
 lines.append('')
 
 lines.append('-- Customizable player sanctums')
