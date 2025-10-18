@@ -84,7 +84,6 @@ lines.append('')
 
 state_vars = [
     'MegaUltraverse.State',
-    'MegaUltraverse.SharedRandom',
     'MegaUltraverse.Systems',
     'MegaUltraverse.Registries',
     'MegaUltraverse.LiveEvents',
@@ -221,8 +220,12 @@ end
 lines.extend(util_block.split('\n'))
 lines.append('')
 
-lines.append('MegaUltraverse.SharedRandom = MegaUltraverse.SharedRandom or seededRandomGenerator(os.time())')
-lines.append('')
+lines.extend([
+    "if not MegaUltraverse.SharedRandom or type(MegaUltraverse.SharedRandom.NextNumber) ~= \"function\" then",
+    "    MegaUltraverse.SharedRandom = seededRandomGenerator(os.time())",
+    "end",
+    "",
+])
 
 registry_lines = [
     'MegaUltraverse.Registries.Abilities = MegaUltraverse.Registries.Abilities or {}',

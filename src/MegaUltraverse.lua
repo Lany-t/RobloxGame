@@ -1,6 +1,6 @@
 --[[
 Mega Ultraverse Mode Script
-Generated on 2025-10-18T00:06:58.410164+00:00
+Generated on 2025-10-18T09:32:37.246652+00:00
 This script powers an experimental AAA-scale Roblox experience with layered mechanics.
 Each system is designed to interlock, supporting dynamic storytelling, combat, and progression.
 ]]
@@ -20,7 +20,6 @@ local HttpService = game:GetService("HttpService")
 
 -- Primary state containers
 MegaUltraverse.State = MegaUltraverse.State or {}
-MegaUltraverse.SharedRandom = MegaUltraverse.SharedRandom or {}
 MegaUltraverse.Systems = MegaUltraverse.Systems or {}
 MegaUltraverse.Registries = MegaUltraverse.Registries or {}
 MegaUltraverse.LiveEvents = MegaUltraverse.LiveEvents or {}
@@ -144,7 +143,9 @@ local function seededRandomGenerator(seed)
     return rng
 end
 
-MegaUltraverse.SharedRandom = MegaUltraverse.SharedRandom or seededRandomGenerator(os.time())
+if not MegaUltraverse.SharedRandom or type(MegaUltraverse.SharedRandom.NextNumber) ~= "function" then
+    MegaUltraverse.SharedRandom = seededRandomGenerator(os.time())
+end
 
 -- Registry definitions for dynamic content
 MegaUltraverse.Registries.Abilities = MegaUltraverse.Registries.Abilities or {}
